@@ -17,3 +17,10 @@ INPT-Campus is a web-based dorm management system designed for the National Inst
 - **Database**: PostgreSQL
 - **Authentication**: JWT-based secure login
 - **AI Integration**: OpenAI API for roommate recommendations and AI assistant
+## Contributors
+
+- **Kssim Mohammed**  
+  [GitHub: SaifVelly](https://github.com/SaifVelly)
+
+- **Mohammed Sbaiti**  
+  [GitHub: simo126](https://github.com/simo126)
