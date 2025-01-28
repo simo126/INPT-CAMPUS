@@ -15,8 +15,7 @@ ALTER TABLE students ADD CONSTRAINT valid_gender CHECK (gender IN ('male', 'fema
 
 -- Ensure valid academic years
 ALTER TABLE students ADD CONSTRAINT valid_year CHECK (year IN ('INE1', 'INE2', 'INE3'));
--- Ensure unique room reservations for the same time period
-ALTER TABLE reservations ADD CONSTRAINT unique_reservation UNIQUE (room_id, start_date, end_date);
+
 
 -- Add gender-based room assignment constraint using a trigger
 -- Use a trigger-based approach for gender restriction (explained below)
