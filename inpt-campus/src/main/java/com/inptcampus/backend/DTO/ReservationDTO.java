@@ -1,6 +1,6 @@
 package com.inptcampus.backend.DTO;
 
-import lombok.Data;
+
 import java.time.LocalDate;
 import java.util.Set;
 

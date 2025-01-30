@@ -9,9 +9,7 @@ import com.inptcampus.backend.Repository.RoomRepository;
 import com.inptcampus.backend.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
