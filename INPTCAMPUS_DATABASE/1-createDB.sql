@@ -44,3 +44,21 @@ CREATE TABLE reservations (
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
 );
+-- Create the join table to link reservations with roommates
+CREATE TABLE reservation_roommates (
+    reservation_id BIGINT NOT NULL,
+    student_id BIGINT NOT NULL,
+    PRIMARY KEY (reservation_id, student_id),
+    FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+);
+-- Create the `issues` table
+CREATE TABLE issues (
+    id BIGSERIAL PRIMARY KEY,
+    room_id BIGINT NOT NULL,
+    description TEXT NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
+);
+

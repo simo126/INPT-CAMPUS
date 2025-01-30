@@ -63,4 +63,5 @@ public class StudentController {
         boolean isDeleted = studentService.deleteStudent(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
 }

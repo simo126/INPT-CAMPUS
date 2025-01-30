@@ -1,16 +1,12 @@
 package com.inptcampus.backend.Model;
 
-
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
-@Table(name = "reservations", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"room_id", "startDate", "endDate"})
-})
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +28,70 @@ public class Reservation {
 
     @Column(nullable = false)
     private String status;
+
+    @ManyToMany
+    @JoinTable(
+            name = "reservation_roommates",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private Set<Student> roommates = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Set<Student> getRoommates() {
+        return roommates;
+    }
+    public void setRoommates(Set<Student> roommates) {
+        this.roommates = roommates;
+    }
+
+    // Getters and Setters
 }
+

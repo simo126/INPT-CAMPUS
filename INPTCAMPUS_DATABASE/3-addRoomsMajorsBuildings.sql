@@ -1,3 +1,15 @@
+INSERT INTO fillieres (name) VALUES
+('ASEDS'),
+('SESNUM'),
+('CLOUD'),
+('AMOA'),
+('ICCN'),
+('SMART'),
+('DATA');
+INSERT INTO buildings (name) VALUES
+('Pavillon 1'),
+('Pavillon 2'),
+('Pavillon 3');
 -- Pavillon 1: 6 floors, 27 rooms per floor, max capacity 2
 DO $$ 
 DECLARE 
