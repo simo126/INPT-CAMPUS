@@ -4,31 +4,56 @@ package com.inptcampus.backend.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "students")
+@Table(name = "students", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "filiere_id", nullable = false)
-    private Long filiereId;
-
-    @Transient // Exclude this field from persistence
-    private String filiereName;
-
-    @Column(nullable = false)
-    private String year;
+    @ManyToOne
+    @JoinColumn(name = "filiere_id", nullable = false)
+    private Filiere filiere;
 
     @Column(nullable = false)
     private String gender;
 
-    // Getters and Setters
+    @Column(name = "current_study_year", nullable = false)
+    private int currentStudyYear;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(name = "reservation_status", nullable = false)
+    private boolean reservationStatus;
+
+
+    public Student() {
+    }
+
+    public Student(String firstName, String lastName, String email, Filiere filiere, String gender, int currentStudyYear, String password, boolean reservationStatus) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.filiere = filiere;
+        this.gender = gender;
+        this.currentStudyYear = currentStudyYear;
+        this.password = password;
+        this.reservationStatus = reservationStatus;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -37,12 +62,20 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -53,28 +86,12 @@ public class Student {
         this.email = email;
     }
 
-    public Long getFiliereId() {
-        return filiereId;
+    public Filiere getFiliere() {
+        return filiere;
     }
 
-    public void setFiliereId(Long filiereId) {
-        this.filiereId = filiereId;
-    }
-
-    public String getFiliereName() {
-        return filiereName;
-    }
-
-    public void setFiliereName(String filiereName) {
-        this.filiereName = filiereName;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
 
     public String getGender() {
@@ -85,4 +102,27 @@ public class Student {
         this.gender = gender;
     }
 
+    public int getCurrentStudyYear() {
+        return currentStudyYear;
+    }
+
+    public void setCurrentStudyYear(int currentStudyYear) {
+        this.currentStudyYear = currentStudyYear;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(boolean reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
 }
