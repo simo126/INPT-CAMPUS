@@ -1,6 +1,5 @@
 package com.inptcampus.backend.Controller;
 
-import com.inptcampus.backend.Repository.ReservationRepository;
 import com.inptcampus.backend.Repository.RoomRepository;
 import com.inptcampus.backend.Repository.StudentRepository;
 import com.inptcampus.backend.Model.Room;

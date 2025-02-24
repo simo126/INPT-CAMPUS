@@ -1,10 +1,8 @@
 package com.inptcampus.backend.Service;
 
 import com.inptcampus.backend.DTO.ReservationDTO;
-import com.inptcampus.backend.Model.Reservation;
 import com.inptcampus.backend.Model.Room;
 import com.inptcampus.backend.Model.Student;
-import com.inptcampus.backend.Repository.ReservationRepository;
 import com.inptcampus.backend.Repository.RoomRepository;
 import com.inptcampus.backend.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
