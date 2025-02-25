@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IssuesRepository extends JpaRepository<Issue, Long> {
+public interface IssueRepository extends JpaRepository<Issue, Long> {
     List<Issue> findByResolvedFalse();
     List<Issue> findByRoomId(String roomId);
 }
