@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Table(name = "filieres")
 public class Filiere implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
