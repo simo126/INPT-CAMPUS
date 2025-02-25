@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "issue")
+@Table(name = "issues")
 public class Issue implements Serializable {
 
     @Id
@@ -29,15 +29,20 @@ public class Issue implements Serializable {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
     public Issue() {
     }
 
-    public Issue(Room room, String description, boolean resolved, LocalDateTime createdAt, Student student) {
+    public Issue(Room room, String description, boolean resolved, Student student) {
         this.room = room;
         this.description = description;
         this.resolved = resolved;
-        this.createdAt = createdAt;
         this.student = student;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -74,10 +79,6 @@ public class Issue implements Serializable {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Student getStudent() {

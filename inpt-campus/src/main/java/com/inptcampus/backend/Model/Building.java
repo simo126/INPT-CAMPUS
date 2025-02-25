@@ -1,8 +1,8 @@
 package com.inptcampus.backend.Model;
 
-
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "buildings")
@@ -14,6 +14,9 @@ public class Building implements Serializable {
 
     @Column(name = "num_floors", nullable = false)
     private int numFloors;
+
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
 
     public Building() {
     }
@@ -36,5 +39,13 @@ public class Building implements Serializable {
 
     public void setNumFloors(int numFloors) {
         this.numFloors = numFloors;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }

@@ -1,11 +1,11 @@
 package com.inptcampus.backend.Model;
+
 import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "filieres")
 public class Filiere implements Serializable {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
