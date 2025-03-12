@@ -1,14 +1,19 @@
 package com.inptcampus.backend.Service;
 
+import com.inptcampus.backend.Model.Issue;
 import com.inptcampus.backend.Model.Room;
 import com.inptcampus.backend.Model.Student;
+import com.inptcampus.backend.Repository.IssueRepository;
 import com.inptcampus.backend.Repository.RoomRepository;
 import com.inptcampus.backend.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReservationService {
+public class IssueService {
+
+    @Autowired
+    private IssueRepository issueRepository;
 
     @Autowired
     private RoomRepository roomRepository;
@@ -16,26 +21,14 @@ public class ReservationService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student reserveRoom(Long studentId, String roomId) {
+    public Issue reportIssue(Long studentId, String roomId, String description) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        if (room.getCurrentOccupancy() >= room.getMaxCapacity()) {
-            throw new RuntimeException("Room is full");
-        }
-
-        if (student.isReservationStatus()) {
-            throw new RuntimeException("Student already reserved a room");
-        }
-
-        student.setRoom(room);
-        student.setReservationStatus(true);
-        room.setCurrentOccupancy(room.getCurrentOccupancy() + 1);
-
-        roomRepository.save(room);
-        return studentRepository.save(student);
+        Issue issue = new Issue(room, description, false, student);
+        return issueRepository.save(issue);
     }
 }
