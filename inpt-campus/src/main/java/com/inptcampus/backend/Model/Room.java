@@ -1,6 +1,5 @@
 package com.inptcampus.backend.Model;
 
-
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +18,12 @@ public class Room implements Serializable {
     @Column(nullable = false)
     private int currentOccupancy = 0;
 
+    @Column(nullable = false)
+    private int floor;
+
+    @Column(nullable = false)
+    private String roomType;
+
     @ManyToOne
     @JoinColumn(name = "building_id", nullable = false)
     private Building building;
@@ -29,12 +34,16 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(String id, int maxCapacity, Building building) {
+    public Room(String id, int maxCapacity, int floor, String roomType, Building building) {
         this.id = id;
         this.maxCapacity = maxCapacity;
+        this.floor = floor;
+        this.roomType = roomType;
         this.currentOccupancy = 0;
         this.building = building;
     }
+
+    // Getters and setters
 
     public String getId() {
         return id;
@@ -58,6 +67,22 @@ public class Room implements Serializable {
 
     public void setCurrentOccupancy(int currentOccupancy) {
         this.currentOccupancy = currentOccupancy;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 
     public List<Student> getStudents() {

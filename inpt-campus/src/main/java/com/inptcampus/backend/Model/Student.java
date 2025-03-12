@@ -57,4 +57,20 @@ public class Student implements Serializable {
         this.passwordHash = passwordHash;
         this.reservationStatus = reservationStatus;
     }
+    public boolean isReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(boolean reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
 }
