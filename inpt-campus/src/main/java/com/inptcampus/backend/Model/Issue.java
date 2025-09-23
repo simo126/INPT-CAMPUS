@@ -1,91 +1,53 @@
 package com.inptcampus.backend.Model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "issues")
-public class Issue implements Serializable {
+public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    private String title;
+
+    @Column(length = 1000)
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
-
-    @Column(nullable = false, length = 500)
-    private String description;
-
-    @Column(nullable = false)
-    private boolean resolved;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    // Getter & Setter
+    public Student getStudent() { return student; }
+    public void setStudent(Student student) { this.student = student; }
+    private boolean resolved = false;
 
-    public Issue() {
-    }
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Issue(Room room, String description, boolean resolved, Student student) {
-        this.room = room;
-        this.description = description;
-        this.resolved = resolved;
-        this.student = student;
-        this.createdAt = LocalDateTime.now();
-    }
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public Room getRoom() {
-        return room;
-    }
+    public Room getRoom() { return room; }
+    public void setRoom(Room room) { this.room = room; }
 
-    public void setRoom(Room room) {
-        this.room = room;
-    }
+    public boolean isResolved() { return resolved; }
+    public void setResolved(boolean resolved) { this.resolved = resolved; }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isResolved() {
-        return resolved;
-    }
-
-    public void setResolved(boolean resolved) {
-        this.resolved = resolved;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

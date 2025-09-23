@@ -1,9 +1,13 @@
 package com.inptcampus.backend.Controller;
 
-import com.inptcampus.backend.DTO.StudentDTO;
+import com.inptcampus.backend.DTO.RoomReservationDTO;
+import com.inptcampus.backend.DTO.StudentRequestDTO;
+import com.inptcampus.backend.DTO.StudentResponseDTO;
+import com.inptcampus.backend.Mapper.StudentMapper;
+import com.inptcampus.backend.Model.Room;
 import com.inptcampus.backend.Model.Student;
 import com.inptcampus.backend.Service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,57 +15,51 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
+@CrossOrigin(origins = "*")  // allow frontend calls
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    // Get all students with filiere names
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    // GET all students
     @GetMapping
-    public List<StudentDTO> getAllStudents() {
-        return studentService.getAllStudentsWithFiliereName();
+    public List<StudentResponseDTO> getAllStudents() {
+        return studentService.getAllStudents().stream()
+                .map(StudentMapper::toDTO)  // convert entity -> DTO
+                .toList();
     }
 
-    // Get a single student by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<StudentDTO> getStudentById(@PathVariable Long id) {
-        Student student = studentService.getStudentById(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        String filiereName = studentService.getFiliereNameById(student.getFiliereId());
-        StudentDTO studentDTO = new StudentDTO(
-                student.getId(),
-                student.getName(),
-                student.getEmail(),
-                filiereName,
-                student.getYear(),
-                student.getGender()
-        );
-
-        return ResponseEntity.ok(studentDTO);
-    }
-
-    // Add a new student
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        Student createdStudent = studentService.saveStudent(student);
-        return ResponseEntity.ok(createdStudent);
+    public ResponseEntity<StudentResponseDTO> createStudent(@RequestBody @Valid StudentRequestDTO dto) {
+        Student student = studentService.createStudent(dto);
+        return ResponseEntity.ok(StudentMapper.toDTO(student));
     }
 
-    // Update an existing student
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id)
+                .map(student -> ResponseEntity.ok(StudentMapper.toDTO(student)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    // UPDATE student
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent) {
-        Student student = studentService.updateStudent(id, updatedStudent);
-        return student != null ? ResponseEntity.ok(student) : ResponseEntity.notFound().build();
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
+        return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 
-    // Delete a student by ID
+    // DELETE student
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        boolean isDeleted = studentService.deleteStudent(id);
-        return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
     }
-
+    @PostMapping("/reserve")
+    public String reserveRoom(@RequestBody RoomReservationDTO dto) {
+        return studentService.reserveRoomWithRoommates(dto);
+    }
 }

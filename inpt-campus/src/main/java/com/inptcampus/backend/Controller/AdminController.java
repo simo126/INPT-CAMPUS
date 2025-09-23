@@ -16,9 +16,6 @@ public class AdminController {
     private StudentRepository studentRepository;
 
     @Autowired
-    private ReservationRepository reservationRepository;
-
-    @Autowired
     private RoomRepository roomRepository;
 
     /**
@@ -28,7 +25,7 @@ public class AdminController {
     public String resetDatabase() {
         try {
             // Step 1: Delete all reservations
-            reservationRepository.deleteAll();
+
 
             // Step 2: Delete all students
             studentRepository.deleteAll();
