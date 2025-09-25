@@ -43,7 +43,9 @@ public class IssueService {
         issue.setStudent(student);  // associate student
         return issueRepository.save(issue);
     }
-
+    public List<Issue> getIssuesForStudent(Student student) {
+        return issueRepository.findByStudent(student);
+    }
     public Issue resolveIssue(Long id) {
         Issue issue = issueRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Issue not found"));

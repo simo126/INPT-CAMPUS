@@ -24,6 +24,9 @@ public class RoomService {
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
+    public List<Room> getAvailableRooms() {
+        return roomRepository.findAll().stream().filter(Room::hasAvailableSpace).toList();
+    }
 
     public Optional<Room> getRoomById(Long id) {
         return roomRepository.findById(id);

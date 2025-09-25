@@ -4,7 +4,13 @@ import com.inptcampus.backend.DTO.IssueRequestDTO;
 import com.inptcampus.backend.DTO.IssueResponseDTO;
 import com.inptcampus.backend.Mapper.IssueMapper;
 import com.inptcampus.backend.Model.Issue;
+import com.inptcampus.backend.Model.Student;
+import com.inptcampus.backend.Repository.StudentRepository;
 import com.inptcampus.backend.Service.IssueService;
+import com.inptcampus.backend.Service.StudentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,12 +18,29 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/issues")
+@SecurityRequirement(name = "BearerAuth") // Requires JWT token
 public class IssueController {
 
     private final IssueService issueService;
 
-    public IssueController(IssueService issueService) {
+    private final StudentRepository studentRepository;
+
+    public IssueController(IssueService issueService, StudentRepository studentRepository) {
         this.issueService = issueService;
+        this.studentRepository = studentRepository;
+    }
+    @GetMapping("/my")
+    public List<IssueResponseDTO> getMyIssues(Authentication authentication) {
+        // The username/email is stored in the authentication principal
+        String email = authentication.getName();
+
+        // Fetch the student from the DB
+        Student student = studentRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        return issueService.getIssuesForStudent(student).stream()
+                .map(IssueMapper::toDTO)
+                .collect(Collectors.toList());
     }
     @GetMapping("/unresolved")
     public List<IssueResponseDTO> getUnresolvedIssues() {

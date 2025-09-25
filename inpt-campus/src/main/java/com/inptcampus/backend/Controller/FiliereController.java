@@ -5,6 +5,7 @@ import com.inptcampus.backend.DTO.FiliereResponseDTO;
 import com.inptcampus.backend.Mapper.FiliereMapper;
 import com.inptcampus.backend.Model.Filiere;
 import com.inptcampus.backend.Service.FiliereService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/filieres")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "BearerAuth") // Requires JWT token
 public class FiliereController {
 
     private final FiliereService filiereService;

@@ -1,8 +1,14 @@
 package com.inptcampus.backend.Controller;
 
+import com.inptcampus.backend.DTO.StudentResponseDTO;
+import com.inptcampus.backend.Mapper.StudentMapper;
+import com.inptcampus.backend.Model.Admin;
 import com.inptcampus.backend.Repository.RoomRepository;
 import com.inptcampus.backend.Repository.StudentRepository;
 import com.inptcampus.backend.Model.Room;
+import com.inptcampus.backend.Service.AdminService;
+import com.inptcampus.backend.Service.StudentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,36 +16,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
+@SecurityRequirement(name = "BearerAuth")
 public class AdminController {
+    private final AdminService adminService;
 
-    @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
-    private RoomRepository roomRepository;
-
-    /**
-     * Deletes all students, reservations, and resets all room occupancies to zero.
-     */
-    @DeleteMapping("/reset")
-    public String resetDatabase() {
-        try {
-            // Step 1: Delete all reservations
-
-
-            // Step 2: Delete all students
-            studentRepository.deleteAll();
-
-            // Step 3: Reset all room occupancies to zero
-            List<Room> rooms = roomRepository.findAll();
-            for (Room room : rooms) {
-                room.setCurrentOccupancy(0);
-            }
-            roomRepository.saveAll(rooms);
-
-            return "All students and reservations deleted. Room occupancies reset.";
-        } catch (Exception e) {
-            return "Error during reset: " + e.getMessage();
-        }
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
     }
+
+    @GetMapping
+    public List<Admin> getAllAdmins() {
+        return adminService.getAllAdmins();
+    }
+
 }

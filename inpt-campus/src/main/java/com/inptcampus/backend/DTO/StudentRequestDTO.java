@@ -17,7 +17,7 @@ public class StudentRequestDTO {
     @NotBlank
     private String email;
 
-    @NotBlank
+    @NotNull
     private Gender gender;
 
     @NotNull

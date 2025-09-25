@@ -7,7 +7,9 @@ import com.inptcampus.backend.Mapper.StudentMapper;
 import com.inptcampus.backend.Model.Room;
 import com.inptcampus.backend.Model.Student;
 import com.inptcampus.backend.Service.StudentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
+@SecurityRequirement(name = "BearerAuth") // Requires JWT token
 @CrossOrigin(origins = "*")  // allow frontend calls
 public class StudentController {
 
@@ -61,5 +64,14 @@ public class StudentController {
     @PostMapping("/reserve")
     public String reserveRoom(@RequestBody RoomReservationDTO dto) {
         return studentService.reserveRoomWithRoommates(dto);
+    }
+    @PostMapping("/unreserve")
+    public ResponseEntity<String> unreserveRoom() {
+        try {
+            studentService.unreserveRoomForConnectedStudent();
+            return ResponseEntity.ok("Room unreserved successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

@@ -19,23 +19,23 @@ public class DatabaseSeeder {
                                    FiliereRepository filiereRepository) {
         return args -> {
             System.out.println("DataBase Seeder ");
-//            createBuildingWithRooms(buildingRepository, roomRepository, "pav1", 6, 2);
-//            createBuildingWithRooms(buildingRepository, roomRepository, "pav2", 2, 4);
-//            createBuildingWithRooms(buildingRepository, roomRepository, "pav3", 4, 2);
-//            createFiliere(filiereRepository, "Ingénierie logicielle avancée pour les services numériques", "ASEDS",
-//                    "Concerne le développement et l'ingénierie de logiciels pour les services digitaux.", true);
-//            createFiliere(filiereRepository, "Sciences de Données", "DATA",
-//                    "Axée sur l'analyse, la gestion et l'exploitation des données.", true);
-//            createFiliere(filiereRepository, "Cybersécurité et Confiance Numérique", "CLOUD",
-//                    "Vise à développer les compétences nécessaires pour la sécurité des systèmes d'information et la confiance dans le numérique.", true);
-//            createFiliere(filiereRepository, "Systèmes Embarqués et Services Numériques", "SESNUM",
-//                    "Formation axée sur les systèmes embarqués (objets connectés, etc.) et leurs services numériques associés.", true);
-//            createFiliere(filiereRepository, "Ingénierie des Technologies de l'Information et de Communication Intelligentes (Smart ICT)", "SMART",
-//                    "Ingénierie pour les TIC intelligentes, incluant les technologies d'information et de communication.", true);
-//            createFiliere(filiereRepository, "Innovation et AMOA", "AMOA",
-//                    "Spécialisation orientée vers l'innovation et le soutien à la maîtrise d'ouvrage dans les projets technologiques.", true);
-//            createFiliere(filiereRepository, "Ingénierie des Systèmes Ubiquitaires et Distribués – Cloud et IoT", "ICCN",
-//                    "Formation spécialisée dans les systèmes ubiquitaires, les systèmes distribués, le cloud computing et l'Internet des Objets (IoT).", true);
+//         createBuildingWithRooms(buildingRepository, roomRepository, "pav1", 6, 2);
+//         createBuildingWithRooms(buildingRepository, roomRepository, "pav2", 2, 4);
+//         createBuildingWithRooms(buildingRepository, roomRepository, "pav3", 4, 2);
+//         createFiliere(filiereRepository, "Ingénierie logicielle avancée pour les services numériques", "ASEDS",
+//                 "Concerne le développement et l'ingénierie de logiciels pour les services digitaux.", true);
+//         createFiliere(filiereRepository, "Sciences de Données", "DATA",
+//                 "Axée sur l'analyse, la gestion et l'exploitation des données.", true);
+//         createFiliere(filiereRepository, "Cybersécurité et Confiance Numérique", "CLOUD",
+//                 "Vise à développer les compétences nécessaires pour la sécurité des systèmes d'information et la confiance dans le numérique.", true);
+//         createFiliere(filiereRepository, "Systèmes Embarqués et Services Numériques", "SESNUM",
+//                 "Formation axée sur les systèmes embarqués (objets connectés, etc.) et leurs services numériques associés.", true);
+//         createFiliere(filiereRepository, "Ingénierie des Technologies de l'Information et de Communication Intelligentes (Smart ICT)", "SMART",
+//                 "Ingénierie pour les TIC intelligentes, incluant les technologies d'information et de communication.", true);
+//         createFiliere(filiereRepository, "Innovation et AMOA", "AMOA",
+//                 "Spécialisation orientée vers l'innovation et le soutien à la maîtrise d'ouvrage dans les projets technologiques.", true);
+//         createFiliere(filiereRepository, "Ingénierie des Systèmes Ubiquitaires et Distribués – Cloud et IoT", "ICCN",
+//                 "Formation spécialisée dans les systèmes ubiquitaires, les systèmes distribués, le cloud computing et l'Internet des Objets (IoT).", true);
         };
     }
     private void createFiliere(FiliereRepository filiereRepository, String name, String code, String description, boolean active) {

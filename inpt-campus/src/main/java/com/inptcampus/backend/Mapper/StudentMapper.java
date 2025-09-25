@@ -13,7 +13,7 @@ public class StudentMapper {
         dto.setLastName(student.getLastName());
         dto.setEmail(student.getEmail());
         dto.setGender(student.getGender());
-        dto.setCurrentStudyYear(student.getCurrentStudyYear());
+        dto.setCurrentStudyYear(student.getCurrentStudyYear() != null ? student.getCurrentStudyYear() : 0);
         dto.setReservationStatus(student.isReservationStatus());
         dto.setActive(student.isActive());
 
