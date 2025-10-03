@@ -25,14 +25,14 @@ public class Issue {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    // Getter & Setter
-    public Student getStudent() { return student; }
-    public void setStudent(Student student) { this.student = student; }
     private boolean resolved = false;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Getters & Setters
+
+    public Student getStudent() { return student; }
+    public void setStudent(Student student) { this.student = student; }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

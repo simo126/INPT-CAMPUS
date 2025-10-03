@@ -45,7 +45,7 @@ public abstract class User {
     @Column(insertable = false, updatable = false)
     private Role role;
 
-    // Getters & Setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

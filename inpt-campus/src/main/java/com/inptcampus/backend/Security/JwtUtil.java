@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    // Secret key (must be at least 256 bits for HS256)
+
     private final String SECRET = "my-very-secret-jwt-key-for-inpt-campus-app-1234567890";
     private final long EXPIRATION = 1000 * 60 * 60 * 24; // 24 hours
 
@@ -20,12 +20,11 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    // Generate token for a given username and role
-    // JwtUtil.java
+
     public String generateToken(String username, Role role) {
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", role.name())  // just "STUDENT" or "ADMIN"
+                .claim("role", role.name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -36,14 +35,14 @@ public class JwtUtil {
         return parseToken(token).getBody().get("role", String.class);
     }
 
-    // Extract username from token
+
     public String getUsername(String token) {
         return parseToken(token).getBody().getSubject();
     }
 
 
 
-    // Validate token
+
     public boolean validateToken(String token) {
         try {
             parseToken(token);
@@ -53,7 +52,7 @@ public class JwtUtil {
         }
     }
 
-    // Parse token
+
     private Jws<Claims> parseToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())

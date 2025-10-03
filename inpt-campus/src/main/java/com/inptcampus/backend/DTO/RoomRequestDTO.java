@@ -25,9 +25,9 @@ public class RoomRequestDTO {
     @Min(1)
     private int maxCapacity;
 
-    private Boolean active; // optional
+    private Boolean active;
 
-    // Getters and setters
+
     public String getRoomNumber() { return roomNumber; }
     public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 

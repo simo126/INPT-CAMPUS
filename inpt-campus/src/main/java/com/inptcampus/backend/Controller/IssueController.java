@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/issues")
-@SecurityRequirement(name = "BearerAuth") // Requires JWT token
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class IssueController {
 
     private final IssueService issueService;
@@ -31,10 +31,9 @@ public class IssueController {
     }
     @GetMapping("/my")
     public List<IssueResponseDTO> getMyIssues(Authentication authentication) {
-        // The username/email is stored in the authentication principal
+
         String email = authentication.getName();
 
-        // Fetch the student from the DB
         Student student = studentRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 

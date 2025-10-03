@@ -8,7 +8,7 @@ public class RoomReservationDTO {
     private Long roomId;                  // room to reserve
     private List<String> roommateEmails;  // optional emails of roommates
 
-    // Getters & setters
+
     public Long getStudentId() {
         return studentId;
     }

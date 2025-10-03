@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/rooms")
-@CrossOrigin(origins = "*")
-@SecurityRequirement(name = "BearerAuth") // Requires JWT token
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class RoomController {
 
     private final RoomService roomService;

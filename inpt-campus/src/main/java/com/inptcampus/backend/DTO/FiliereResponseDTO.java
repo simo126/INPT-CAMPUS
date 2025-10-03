@@ -7,9 +7,9 @@ public class FiliereResponseDTO {
     private String code;
     private String description;
     private boolean active;
-    private int studentCount; // optional: number of students in filiere
+    private int studentCount;
 
-    // Getters & setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

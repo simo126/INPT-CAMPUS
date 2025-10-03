@@ -41,7 +41,7 @@ public class Filiere {
         this.code = code;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }

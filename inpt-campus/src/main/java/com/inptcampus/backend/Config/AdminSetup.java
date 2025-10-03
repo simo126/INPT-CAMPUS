@@ -17,10 +17,10 @@ public class AdminSetup {
             if (adminRepository.findByEmail("admin@inpt.com").isEmpty()) {
                 Admin admin = new Admin();
                 admin.setEmail("admin@inpt.com");
-                admin.setPasswordHash(encoder.encode("Admin123!")); // hashed password
+                admin.setPasswordHash(encoder.encode("Admin123!"));
                 admin.setRole(Role.ADMIN);
-                admin.setFirstName("Super"); // <-- required
-                admin.setLastName("Admin");  // <-- required
+                admin.setFirstName("Super");
+                admin.setLastName("Admin");
                 adminRepository.save(admin);
                 System.out.println("✅ Admin created: admin@inpt.com / Admin123!");
             }

@@ -39,16 +39,22 @@ public class Building {
     @Column(nullable = false)
     private boolean active = true;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Gender gender;
+
+
     public Building() {
     }
 
-    public Building(String name, String address, int numFloors) {
+    public Building(String name, String address, int numFloors, Gender gender) {
         this.name = name;
         this.address = address;
         this.numFloors = numFloors;
+        this.gender = gender;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -103,5 +109,13 @@ public class Building {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

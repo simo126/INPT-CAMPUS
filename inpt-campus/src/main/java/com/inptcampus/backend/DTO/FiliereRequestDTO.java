@@ -15,9 +15,9 @@ public class FiliereRequestDTO {
     @Size(max = 500)
     private String description;
 
-    private Boolean active; // optional
+    private Boolean active;
 
-    // Getters & setters
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

@@ -17,8 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
-@SecurityRequirement(name = "BearerAuth") // Requires JWT token
-@CrossOrigin(origins = "*")  // allow frontend calls
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class StudentController {
 
     private final StudentService studentService;
@@ -27,7 +26,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    // GET all students
+
     @GetMapping
     public List<StudentResponseDTO> getAllStudents() {
         return studentService.getAllStudents().stream()
@@ -48,14 +47,20 @@ public class StudentController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/available")
+    public List<StudentResponseDTO> getAvailableStudents() {
+        return studentService.getAvailableStudents().stream()
+                .map(StudentMapper::toDTO)
+                .toList();
+    }
 
-    // UPDATE student
+
+
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 
-    // DELETE student
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);

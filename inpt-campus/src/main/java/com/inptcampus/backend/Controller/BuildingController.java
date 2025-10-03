@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/buildings")
-@CrossOrigin(origins = "*")
-@SecurityRequirement(name = "BearerAuth") // Requires JWT token
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class BuildingController {
 
     private final BuildingService buildingService;

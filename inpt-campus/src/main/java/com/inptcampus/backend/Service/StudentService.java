@@ -76,9 +76,9 @@ public class StudentService {
         student.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         student.setGender(request.getGender());
         student.setCurrentStudyYear(request.getCurrentStudyYear());
-        student.setReservationStatus(false); // default
+        student.setReservationStatus(false);
 
-        // Set filiere if exists
+
         if (request.getFiliereId() != null) {
             Filiere filiere = filiereRepository.findById(request.getFiliereId())
                     .orElseThrow(() -> new RuntimeException("Filiere not found"));
@@ -150,7 +150,7 @@ public class StudentService {
         Room room = roomRepository.findById(dto.getRoomId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        // Gather all students to reserve together
+
         List<Student> allStudents = new ArrayList<>();
         allStudents.add(student);
 
@@ -171,12 +171,12 @@ public class StudentService {
             }
         }
 
-        // Check capacity
+
         if (room.getCurrentOccupancy() + allStudents.size() > room.getMaxCapacity()) {
             throw new RuntimeException("Not enough space in the room for all selected students");
         }
 
-        // Reserve room for all students
+
         for (Student s : allStudents) {
             s.setRoom(room);
             s.setReservationStatus(true);
@@ -189,5 +189,10 @@ public class StudentService {
 
         return room.getRoomNumber();
     }
+
+    public List<Student> getAvailableStudents() {
+        return studentRepository.findByRoomIsNull();
+    }
+
 
 }

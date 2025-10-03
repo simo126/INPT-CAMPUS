@@ -24,14 +24,14 @@ public class StudentRequestDTO {
     private Integer currentStudyYear;
 
     @NotBlank
-    private String password; // plain text (will be hashed in service)
+    private String password;
 
     @NotNull
-    private Long filiereId; // instead of whole Filiere object
+    private Long filiereId;
 
-    private Long roomId; // optional
+    private Long roomId;
 
-    // Getters & setters
+
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 

@@ -13,11 +13,11 @@ public class Student extends User {
     private Filiere filiere;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)   // Allow null for Admin
+    @Column(nullable = true)
     private Gender gender;
 
     @Column(name = "current_study_year", nullable = true)
-    private Integer currentStudyYear; // use Integer instead of int
+    private Integer currentStudyYear;
 
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = true)
@@ -26,7 +26,7 @@ public class Student extends User {
     @Column(name = "reservation_status", nullable = true)
     private Boolean reservationStatus;
 
-    // Getters and Setters
+
     public Filiere getFiliere() { return filiere; }
     public void setFiliere(Filiere filiere) { this.filiere = filiere; }
 

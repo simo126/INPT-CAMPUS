@@ -17,7 +17,7 @@ public class IssueRequestDTO {
 
     public Long getStudentId() { return studentId; }
     public void setStudentId(Long studentId) { this.studentId = studentId; }
-    // Getters & Setters
+
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 

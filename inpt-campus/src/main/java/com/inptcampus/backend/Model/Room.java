@@ -33,7 +33,7 @@ public class Room {
 
     @NotNull
     @Column(name = "room_type", nullable = false)
-    @Enumerated(EnumType.STRING) // stores the enum name (DOUBLE, QUADRUPLE) instead of ordinal number
+    @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
     @Min(1)
@@ -65,7 +65,7 @@ public class Room {
         this.currentOccupancy = 0;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -147,7 +147,7 @@ public class Room {
         this.active = active;
     }
 
-    // Helper method to check if room has available space
+
     public boolean hasAvailableSpace() {
         return currentOccupancy < maxCapacity;
     }

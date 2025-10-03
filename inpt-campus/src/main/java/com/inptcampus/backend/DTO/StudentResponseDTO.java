@@ -12,11 +12,11 @@ public class StudentResponseDTO {
     private int currentStudyYear;
     private boolean reservationStatus;
     private boolean active;
-    private FiliereSimpleDTO filiere; // only id and name
-    private String roomNumber;  // instead of whole Room entity
-    private Long roomId;        // optional if you want the room id
+    private FiliereSimpleDTO filiere;
+    private String roomNumber;
+    private Long roomId;
 
-    // Getters and Setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

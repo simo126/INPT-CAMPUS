@@ -11,7 +11,7 @@ public class RegisterRequestDTO {
     private Gender gender;
     private Integer currentStudyYear;
 
-    // Getters & Setters
+
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 

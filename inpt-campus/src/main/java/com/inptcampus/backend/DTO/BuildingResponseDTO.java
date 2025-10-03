@@ -1,5 +1,7 @@
 package com.inptcampus.backend.DTO;
 
+import com.inptcampus.backend.Model.Gender;
+
 public class BuildingResponseDTO {
 
     private Long id;
@@ -8,9 +10,9 @@ public class BuildingResponseDTO {
     private int numFloors;
     private String description;
     private boolean active;
-    private int roomCount; // optional: number of rooms
+    private int roomCount;
+    private Gender gender;
 
-    // Getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -31,4 +33,12 @@ public class BuildingResponseDTO {
 
     public int getRoomCount() { return roomCount; }
     public void setRoomCount(int roomCount) { this.roomCount = roomCount; }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }

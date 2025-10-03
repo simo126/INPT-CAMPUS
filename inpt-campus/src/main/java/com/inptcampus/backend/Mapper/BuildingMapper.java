@@ -13,6 +13,7 @@ public class BuildingMapper {
         dto.setNumFloors(building.getNumFloors());
         dto.setDescription(building.getDescription());
         dto.setActive(building.isActive());
+        dto.setGender(building.getGender());
         dto.setRoomCount(building.getRooms() != null ? building.getRooms().size() : 0);
         return dto;
     }
