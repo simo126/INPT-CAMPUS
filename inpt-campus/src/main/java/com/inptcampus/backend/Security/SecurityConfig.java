@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/buildings").permitAll()
                         .requestMatchers("/api/students/available").permitAll()
                         .requestMatchers("/api/students").permitAll()
+                        .requestMatchers("/api/issues/my").hasRole("STUDENT")
+                        .requestMatchers("/api/issues").hasRole("STUDENT")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/filieres","/api/rooms/available").permitAll()
 

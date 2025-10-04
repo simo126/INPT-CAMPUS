@@ -82,7 +82,19 @@ public class AuthController {
                     "description", student.getFiliere().getDescription()
                 );
             }
-
+            Map<String, Object> roomInfo = null;
+            if (student.getRoom() != null) {
+                roomInfo = Map.of(
+                        "id", student.getRoom().getId(),
+                        "roomNumber", student.getRoom().getRoomNumber(),
+                        "building", Map.of(
+                                "id", student.getRoom().getBuilding().getId(),
+                                "name", student.getRoom().getBuilding().getName(),
+                                "address", student.getRoom().getBuilding().getAddress(),
+                                "numFloors", student.getRoom().getBuilding().getNumFloors()
+                        )
+                );
+            }
             response = Map.of(
                     "id", user.getId(),
                     "email", user.getEmail(),
@@ -92,10 +104,10 @@ public class AuthController {
                     "role", role,
                     "currentStudyYear", student.getCurrentStudyYear() != null ? student.getCurrentStudyYear() : 0,
                     "filiere", filiereInfo != null ? filiereInfo : Map.of(),
-                    "room", student.getRoom()
+                    "room", roomInfo != null ? roomInfo : Map.of()
             );
         }
-
+        System.out.println(response);
         return ResponseEntity.ok(response);
     }
 
