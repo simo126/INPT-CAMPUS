@@ -14,7 +14,7 @@ export const DashBoard = () => {
           `${import.meta.env.VITE_API_BASE_URL}/issues`,
           {
             withCredentials: true,
-            timeout: 5000,
+           
           }
         );
         setIssues(res.data);

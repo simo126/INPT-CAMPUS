@@ -2,14 +2,13 @@ networks:
   inpt-network:
 
 services:
-
   backend:
     build:
       context: ./inpt-campus-backend
       dockerfile: Dockerfile
     container_name: inpt-campus-backend
     env_file:
-      - ./inpt-campus-backend/.env
+      - ./inpt-campus-backend/.env.prod
     networks:
       - inpt-network
     ports:
@@ -20,13 +19,12 @@ services:
       context: ./inpt-campus-frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_BASE_URL: http://localhost:8080/api
+        # UPDATE THIS WITH YOUR ACTUAL DEPLOYED BACKEND URL
+        VITE_API_BASE_URL: https://your-backend-domain.com/api
     container_name: inpt-campus-frontend
     ports:
-      - "5173:80"  
+      - "5173:80"
     networks:
       - inpt-network
     depends_on:
       - backend
-
- 

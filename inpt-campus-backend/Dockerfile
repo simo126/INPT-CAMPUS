@@ -1,4 +1,4 @@
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
 WORKDIR /app
 
 
@@ -10,8 +10,11 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17.0.11_9-jre-alpine AS runtime
 WORKDIR /app
+
+# Update Alpine packages to fix vulnerabilities
+RUN apk update && apk upgrade --available
 
 
 COPY --from=builder /app/target/*.jar app.jar

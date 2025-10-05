@@ -131,10 +131,12 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
 
+        
+
         ResponseCookie cookie = ResponseCookie.from("jwt", token)
                 .httpOnly(true)
-                .secure(false)
-                .sameSite("Lax")
+                .secure(true)
+                .sameSite("None")
                 .path("/")
                 .maxAge(24 * 60 * 60)
                 .build();
@@ -149,8 +151,8 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpServletResponse response) {
         ResponseCookie cookie = ResponseCookie.from("jwt", "")
                 .httpOnly(true)
-                .secure(false)
-                .sameSite("Lax")
+                .secure(true)
+                .sameSite("None")
                 .path("/")
                 .maxAge(0)
                 .build();

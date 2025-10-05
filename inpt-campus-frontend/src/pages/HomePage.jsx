@@ -20,7 +20,6 @@ export const HomePage = () => {
           `${import.meta.env.VITE_API_BASE_URL}/auth/me`,
           {
             withCredentials: true,
-            timeout: 5000,
           }
         );
 
@@ -44,7 +43,6 @@ export const HomePage = () => {
         {},
         {
           withCredentials: true,
-          timeout: 5000,
         }
       );
 
