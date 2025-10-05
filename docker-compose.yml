@@ -1,0 +1,46 @@
+networks:
+  inpt-network:
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: dbinptcampus
+    environment:
+      POSTGRES_USER: inptcampus
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - inpt-network
+
+  backend:
+    build:
+      context: ./inpt-campus-backend
+      dockerfile: Dockerfile
+    container_name: inpt-campus-backend
+    env_file:
+      - ./inpt-campus-backend/.env
+    networks:
+      - inpt-network
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./inpt-campus-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8080/api
+    container_name: inpt-campus-frontend
+    ports:
+      - "5173:80" # expose frontend on localhost:5173
+    networks:
+      - inpt-network
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
